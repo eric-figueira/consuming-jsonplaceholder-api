@@ -52,17 +52,26 @@ main .post-container .post .album-container {
     margin-top: 20px;
 }
 
-
 main .post-container .post .album-container .album-image-container img{
     width: 100%;
     height: 100%;
 }
 
-main .post-container .post .album-container .album-info-container 
+main .post-container .post .album-container .album-info-container { margin-top: 20px; }
+main .post-container .post .album-container .album-info-container .comments-number { margin-top: 25px; }
+
+@media (max-width: 730px) 
 {
-    margin-top: 20px;
+    main { width: 95vw; }
 }
 
-main .post-container .post .album-container .album-info-container .comments-number {
-    margin-top: 25px;
+@media (max-width: 500px) 
+{
+    main .post-container { padding: 1.5rem; }
+    main .post-container .post .user-info-container 
+    {
+        gap: 0px;
+        flex-direction: column;
+    }
+    main .post-container .post .album-container .album-info-container p { text-align: center; }
 }
