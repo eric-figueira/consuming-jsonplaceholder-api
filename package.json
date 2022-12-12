@@ -1,0 +1,24 @@
+{
+  "name": "consuming-jsonplaceholder-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eric-figueira/consuming-jsonplaceholder-api.git"
+  },
+  "author": "Eric Figueira",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eric-figueira/consuming-jsonplaceholder-api/issues"
+  },
+  "homepage": "https://github.com/eric-figueira/consuming-jsonplaceholder-api#readme",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
