@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/eric-figueira/consuming-jsonplaceholder-api/issues"
   },
-  "homepage": "https://github.com/eric-figueira/consuming-jsonplaceholder-api#readme"
+  "homepage": "https://github.com/eric-figueira/consuming-jsonplaceholder-api#readme",
+  "dependencies": {
+    "ejs": "^3.1.8"
+  }
 }
