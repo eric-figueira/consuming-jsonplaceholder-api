@@ -5,29 +5,33 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home Page - Posts</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/styles/style.css" type="text/css">
     </head>
     <body>
         <main>
-            <div class="post-container">
-                <div class="post">
-                    <div class="user-info-container">
-                        <div class="user-img">
+            <h1 style="font-size: 4rem; text-align: center; padding-top: 50px;">What's on Trend</h1>
+            <% for (let i = 0; i < final_render_response.length; i++) { %>
+                <div class="post-container">
+                    <div class="post">
+                        <div class="user-info-container">
+                            <div class="user-img">
+                                <img src="<%= final_render_response[i]["profileImg"] %>" alt="Profile Image">
+                            </div>
+                            <h2><%= final_render_response[i]["username"] %></h2>
                         </div>
-                        <h2>Nome de Usuário</h2>
-                    </div>
-                    <div class="album-container">
-                        <div class="album-image-container">
-                            <img src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0%2C176%2C3008%2C1654&wid=4000&hei=2200&scl=0.752" alt="album-image">
-                        </div>
-                        <div class="album-info-container">
-                            <h1>Título</h1>
-                            <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur omnis incidunt consequatur. Aliquid vel repellendus ullam itaque magni neque recusandae sunt eaque veniam repellat. Aliquid, consectetur? Laborum, aperiam dolorem quisquam amet molestiae ad pariatur vero dicta? Voluptas cumque consectetur culpa!</h3>
-                            <p class="comments-number">3 comentários</p>
+                        <div class="album-container">
+                            <div class="album-image-container">
+                                <img src="<%= final_render_response[i]["thumbnailUrl"] %>" alt="Album Image">
+                            </div>
+                            <div class="album-info-container">
+                                <h1><%= final_render_response[i]["title"] %></h1>
+                                <h3><%= final_render_response[i]["body"] %></h3>
+                                <p class="comments-number"><%= final_render_response[i]["numComments"] %> comentário(s)</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <% } %>
         </main>
     </body>
 </html>
