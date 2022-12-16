@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Profile - Nome de Usuario</title>
-        <link rel="stylesheet" href="../../public/styles/profile.css">
+        <title>Profile - <%= final_render_response_user_info[0]["username"] %></title>
+        <link rel="stylesheet" href="/styles/profile.css">
     </head>
     <body>
         <main>
@@ -14,8 +14,8 @@
                     <div class="profile-info-container-grid">
                         <div class="profile-img"> </div>
                         <div class="username-name">
-                            <h1 style="margin-bottom: 20px;">Nome de Usuário</h1>
-                            <h3>Nome Real</h3>
+                            <h1 style="margin-bottom: 10px;"><%= final_render_response_user_info[0]["username"] %></h1>
+                            <h3><%= final_render_response_user_info[0]["name"] %></h3>
                         </div>
                         <div class="blank"></div>
                         <div class="list-info">
@@ -23,17 +23,25 @@
                                 <li>
                                     <div class="info-wrapper">
                                         <div class="icon-wrapper">
-                                            <img src="../../public/images/local-icon.png" alt="City Icon">
+                                            <img src="/images/local-icon.png" alt="City Icon">
                                         </div>
-                                        <h2>Cidade</h2>
+                                        <h2><%= final_render_response_user_info[0]["city"] %></h2>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="info-wrapper">
                                         <div class="icon-wrapper">
-                                            <img src="../../public/images/email-icon.png" alt="Email Icon">
+                                            <img src="/images/email-icon.png" alt="Email Icon">
                                         </div>
-                                        <h2>Email</h2>
+                                        <h2><%= final_render_response_user_info[0]["email"] %></h2>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="info-wrapper">
+                                        <div class="icon-wrapper">
+                                            <img src="/images/website-icon.png" alt="Website Icon">
+                                        </div>
+                                        <h2><%= final_render_response_user_info[0]["website"] %></h2>
                                     </div>
                                 </li>
                             </ul>
@@ -45,12 +53,11 @@
                         <button class="button friend">Add Friend</button>
                     </div>
                     <div class="profile-posts-container">
-                        <h2>Latest Posts</h2>
+                        <h1>Latest Posts</h1>
                         <ul>
-                            <li><h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis, fuga.</h2></li>
-                            <li><h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis, fuga.</h2></li>
-                            <li><h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis, fuga.</h2></li>
-                            <li><h2>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis, fuga.</h2></li>
+                            <% for (let post of final_render_response_posts) { %>
+                                <li><h2 style="text-transform: capitalize;"><%= post["post_title"] %></h2></li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>

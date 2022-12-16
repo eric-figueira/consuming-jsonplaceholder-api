@@ -46,8 +46,8 @@ main .profile-container .profile-info-posts-container .profile-info-container-gr
 {
     display: grid;
     grid-template-areas: 
-        "profile-img username-name"
-        "blank list-info";
+        "profile-img username-name username-name"
+        "blank list-info list-info";
     grid-template-columns: 150px auto;
     grid-template-rows: 150px auto;
     grid-column-gap: 50px;
@@ -118,7 +118,8 @@ main .profile-container .profile-info-posts-container .profile-buttons-wrapper .
     outline: none;
     cursor: pointer;
     border: 1px solid #000;
-    padding: 10px 75px;
+    padding-inline: calc(100%/12);
+    padding-block: 10px;
     font-size: 1.15rem;
     border-radius: 35px;
     font-weight: 700;
@@ -141,4 +142,23 @@ main .profile-container .profile-info-posts-container .profile-buttons-wrapper .
 {
     background: #000;
     color: #fff;
+}
+
+main .profile-container .profile-posts-container ul li
+{
+    list-style: none;
+    padding-block: 15px;
+}
+
+@media (max-width: 1090px) {
+    main { width: 90vw; }
+    main .profile-container { padding: 3rem 5rem; }
+}
+
+@media (max-width: 720px) {
+    main .profile-container { padding: 3rem 3rem; }
+    main .profile-container .profile-info-posts-container .profile-buttons-wrapper .button { padding-inline: calc(100%/18); }
+    main .profile-container .profile-info-posts-container .profile-info-container-grid {
+        grid-column-gap: 30px;
+    }
 }

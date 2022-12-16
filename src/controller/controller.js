@@ -72,3 +72,54 @@ exports.render_home = ('/home', async(req, res) => {
     }
     catch (erro) { console.log(erro) }
 })
+
+
+exports.render_profile = ('/profile/:username', (req, res) => {
+
+    const username = req.params.username
+
+    try 
+    {
+        const request_users = axios.get(USERS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
+        const request_posts = axios.get(POSTS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
+
+        let final_render_response_user_info = []
+        let final_render_response_posts = []
+
+        axios.all([request_users, request_posts]).then(
+            axios.spread((...responses) => 
+            {
+                const res_users = responses[0]["data"]
+                const res_posts = responses[1]["data"]
+
+                for (let user of res_users){
+
+                    if (user["username"] == username) {
+                        // Getting the informations of the user
+                        let user_info = {}
+                        user_info.name       = user["name"]
+                        user_info.username   = user["username"]
+                        user_info.email      = user["email"]
+                        user_info.city       = user["address"]["city"]
+                        user_info.website    = user["website"]
+
+                        final_render_response_user_info.push(user_info)
+
+                        // Getting the posts of the user
+                        for (let post of res_posts) {
+
+                            if (post["userId"] == user["id"]) {
+                                let obj = {}
+                                obj.post_title = post["title"]
+
+                                final_render_response_posts.push(obj)
+                            }
+                        }
+                    }
+                }
+                res.render('../src/views/profile', {final_render_response_user_info: final_render_response_user_info, final_render_response_posts: final_render_response_posts})
+            })
+        )
+    }
+    catch (erro) { console.error(erro) }
+})
