@@ -1,0 +1,37 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img { max-width: 100%; }
+li  { list-style: none; }
+
+.navbar .navbar-nav
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+}
+
+.navbar .navbar-nav .nav-item .icon-wrapper
+{
+    width: 40px;
+    height: 40px;
+}
+
+
+header {
+    background: rgb(217, 217, 255);
+    height: 55vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main 
+{
+    padding: 3rem 7rem;
+}
