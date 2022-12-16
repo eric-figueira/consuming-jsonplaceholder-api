@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile - <%= final_render_response_user_info[0]["username"] %></title>
+        <link rel="stylesheet" href="/styles/profile.css">
+    </head>
+    <body>
+        <main>
+            <div class="profile-container">
+                <div class="profile-info-posts-container">
+                    <div class="profile-info-container-grid">
+                        <div class="profile-img"> </div>
+                        <div class="username-name">
+                            <h1 style="margin-bottom: 10px;"><%= final_render_response_user_info[0]["username"] %></h1>
+                            <h3><%= final_render_response_user_info[0]["name"] %></h3>
+                        </div>
+                        <div class="blank"></div>
+                        <div class="list-info">
+                            <ul>
+                                <li>
+                                    <div class="info-wrapper">
+                                        <div class="icon-wrapper">
+                                            <img src="/images/local-icon.png" alt="City Icon">
+                                        </div>
+                                        <h2><%= final_render_response_user_info[0]["city"] %></h2>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="info-wrapper">
+                                        <div class="icon-wrapper">
+                                            <img src="/images/email-icon.png" alt="Email Icon">
+                                        </div>
+                                        <h2><%= final_render_response_user_info[0]["email"] %></h2>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="info-wrapper">
+                                        <div class="icon-wrapper">
+                                            <img src="/images/website-icon.png" alt="Website Icon">
+                                        </div>
+                                        <h2><%= final_render_response_user_info[0]["website"] %></h2>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="profile-buttons-wrapper">
+                        <button class="button follow">Follow</button>
+                        <button class="button contact">Contact</button>
+                        <button class="button friend">Add Friend</button>
+                    </div>
+                    <div class="profile-posts-container">
+                        <h1>Latest Posts</h1>
+                        <ul>
+                            <% for (let post of final_render_response_posts) { %>
+                                <li><h2 style="text-transform: capitalize;"><%= post["post_title"] %></h2></li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
