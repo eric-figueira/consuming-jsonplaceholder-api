@@ -32,6 +32,11 @@ header {
     flex-direction: column;
 }
 
+header h1 
+{
+    font-size: 4rem;
+}
+
 header h3 
 {
     margin-block: 50px;
@@ -42,11 +47,12 @@ header h3
 
 main 
 {
-    padding: 7rem;
+    padding: 7rem 7rem 2rem 7rem;
 }
 
 main .wrapper 
 {
+    position: relative;
     max-width: 65vw;
     margin: auto;
 }
@@ -60,6 +66,7 @@ main .wrapper .paragraphs-container
 
 main .wrapper .comment-section
 {
+    position: relative;
     margin-top: 5rem;
 }
 
@@ -83,6 +90,7 @@ main .wrapper .comment-section .comments-title::after
 
 main .wrapper .comment-section .comment 
 {
+    position: relative;
     padding: 2rem 2rem;
     border: 1px solid rgb(144, 144, 144);
     border-radius: 7px;
@@ -91,14 +99,16 @@ main .wrapper .comment-section .comment
 
 main .wrapper .comment-section .comment .comment-header 
 {
+    position: relative;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 main .wrapper .comment-section .comment .comment-header .user-img-container 
 {
+    position: relative;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -107,5 +117,20 @@ main .wrapper .comment-section .comment .comment-header .user-img-container
 
 main .wrapper .author-container 
 {
-    background: #bdbdbd;
+    position: relative;
+    bottom: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 1.7rem;
+}
+
+@media (max-width: 850px)
+{
+    main { padding: 2rem; }
+    header h1 { font-size: 3rem; }
+    header h3 { font-size: 1rem; max-width: 450px; }
+    main .wrapper .paragraphs-container { font-size: 1rem; }
+    main .wrapper .author-container { font-size: 1.2rem; }
 }
