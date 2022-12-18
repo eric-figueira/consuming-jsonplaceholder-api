@@ -56,7 +56,9 @@
                         <h1>Latest Posts</h1>
                         <ul>
                             <% for (let post of final_render_response_posts) { %>
-                                <li><h2 style="text-transform: capitalize;"><%= post["post_title"] %></h2></li>
+                                <li><h2 style="text-transform: capitalize;">
+                                    <a href="/post/<%= post["post_title"] %>"><%= post["post_title"] %></a>
+                                </h2></li>
                             <% } %>
                         </ul>
                     </div>
