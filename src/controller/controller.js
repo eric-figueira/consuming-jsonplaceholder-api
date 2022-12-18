@@ -123,3 +123,100 @@ exports.render_profile = ('/profile/:username', (req, res) => {
     }
     catch (erro) { console.error(erro) }
 })
+
+
+exports.render_post = ('/post/:title', (req, res) => {
+
+    const title = req.params.title.toLowerCase()
+
+    let post_id
+    
+    let post_obj = {}
+    /*
+        post_obj = {
+            post_title: title,
+            post_body: body
+            post_img: img
+        }
+    */
+
+    let user_author_id
+    let author_username
+    
+    let num_paragraphs
+
+    try 
+    {
+        const request_posts = axios.get(POSTS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
+        const request_users = axios.get(USERS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
+        const request_comments = axios.get(COMMENTS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
+        const request_photos = axios.get(PHOTOS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
+
+        let final_render_response_comments = []
+
+        axios.all([request_posts, request_users, request_comments, request_photos]).then(
+            axios.spread((...responses) => {
+
+                const res_posts = responses[0]["data"]
+                const res_users = responses[1]["data"]
+                const res_comm  = responses[2]["data"]
+                const res_photos = responses[3]["data"]
+
+                // Getting the body and useful ids of the post
+                for (let post of res_posts) 
+                {
+                    if (post["title"] == title) {
+                        post_obj.post_title = title
+                        post_obj.post_body = post["body"]
+                        post_id = post["id"]
+                        user_author_id = post["userId"]
+
+                        post_obj.post_body = post_obj.post_body.replace(/\n|\r/g, " "); // The body comes with \n by default from the api
+                    }
+                }
+
+                // Random number of paragraphs
+                num_paragraphs = Math.floor(Math.random() * (8 - 2 + 1) + 2) // Max of 7 paragraphs
+
+
+                // Get the comments
+                let photos_from_post = res_photos.filter(photo => photo["albumId"] == post_id) // Getting the photos of the album from that post, rememeber: every post has an album, so basically we are getting the photos of the post
+
+                post_obj.post_img = photos_from_post[Math.floor(Math.random() * photos_from_post.length)]["url"]
+
+                for (let comment of res_comm) {
+
+                    if (comment["postId"] == post_id) {
+                        let comment_obj = {}
+                        /*
+                            comment_obj = {
+                                comm_user_email: email,
+                                comm_user_photo: img,
+                                comm_body: body
+                            }
+                        */
+
+                        // Getting a random image to be the users profile image
+                        let index = Math.floor(Math.random() * photos_from_post.length)
+
+                        comment_obj.comm_user_img = photos_from_post[index]["thumbnailUrl"]
+                        comment_obj.comm_user_email = comment["email"]
+                        comment_obj.comm_body = comment["body"]
+
+                        final_render_response_comments.push(comment_obj)
+                    }
+                }
+
+                // Getting the author's username
+                for (let user of res_users) {
+                    if (user["id"] == user_author_id) {
+                        author_username = user["username"]
+                    }
+                }
+                
+                res.render('../src/views/post', {post_obj: post_obj, final_render_response_comments: final_render_response_comments, num_paragraphs: num_paragraphs , author_username: author_username})
+            })
+        )
+    }
+    catch (erro) { console.error(erro) }
+})
