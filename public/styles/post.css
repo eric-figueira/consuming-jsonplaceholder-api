@@ -9,6 +9,11 @@
 img { max-width: 100%; }
 li  { list-style: none; }
 
+.tab
+{
+    text-indent: 8%;
+}
+
 .navbar .navbar-nav
 {
     display: flex;
@@ -24,18 +29,21 @@ li  { list-style: none; }
 
 
 header {
-    background: rgb(217, 217, 255);
     height: 55vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-repeat: no-repeat;
+    object-fit: cover;
 }
 
 header h1 
 {
     font-size: 4rem;
     text-transform: capitalize;
+    max-width: 50%;
+    text-align: center;
 }
 
 header h3 
@@ -63,7 +71,6 @@ main .wrapper .paragraphs-container
 {
     font-size: 1.5rem;
     text-align: justify;
-    
 }
 
 main .wrapper .comment-section
@@ -117,15 +124,17 @@ main .wrapper .comment-section .comment .comment-header .user-img-container
     background: #000;
 }
 
+main .wrapper .comment-section .comment .comment-header .user-img-container img { border-radius: 50%; }
+
 main .wrapper .author-container 
 {
     position: relative;
-    bottom: 0;
     text-align: center;
     display: flex;
     justify-content: center;
     gap: 1.5rem;
     font-size: 1.7rem;
+    margin-top: 50px;
 }
 
 @media (max-width: 850px)

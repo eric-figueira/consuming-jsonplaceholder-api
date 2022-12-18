@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><%= post_obj["title"] %></title>
+        <title><%= post_obj["post_title"] %></title>
         <link rel="stylesheet" href="/styles/post.css">
     </head>
     <body>
@@ -22,18 +22,23 @@
                 </li>
             </ul>
         </nav>
-        <header>
-            <!-- <img src="#" alt="Header Image"> -->
-            <h1><%= post_obj["title"] %></h1>
-            <h3><%= post_obj["body"] %></h3>
+        <header style="background: url('<%= post_obj["post_img"] %>');">
+            <h1><%= post_obj["post_title"] %></h1>
+            <h3><%= post_obj["post_title"] %></h3>
         </header>
         <main>  
             <div class="wrapper">
                 <div class="paragraphs-container">
                     <% for (let i = 0; i < num_paragraphs; i++) { %>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia rerum, facere doloremque veritatis id ullam maiores, ipsum ex quod praesentium aspernatur sint adipisci incidunt. Sit eius eum quod rerum quibusdam in fugit dolor inventore quos esse mollitia quis eaque illum adipisci voluptatum beatae iure accusantium eligendi, libero voluptatem blanditiis odio aliquam placeat. Atque omnis dicta, provident nemo tenetur commodi quos voluptas. Quia commodi saepe non totam tenetur maiores possimus doloribus animi laboriosam obcaecati a maxime nesciunt optio, odit at iure id eaque voluptas soluta repellendus hic minus accusamus expedita.</p>
+                        <p class="tab">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia rerum, facere doloremque veritatis id ullam maiores, ipsum ex quod praesentium aspernatur sint adipisci incidunt. Sit eius eum quod rerum quibusdam in fugit dolor inventore quos esse mollitia quis eaque illum adipisci voluptatum beatae iure accusantium eligendi, libero voluptatem blanditiis odio aliquam placeat. Atque omnis dicta, provident nemo tenetur commodi quos voluptas. Quia commodi saepe non totam tenetur maiores possimus doloribus animi laboriosam obcaecati a maxime nesciunt optio, odit at iure id eaque voluptas soluta repellendus hic minus accusamus expedita.</p>
                     <% } %>
                 </div>
+                
+                <section class="author-container">
+                    <h4>Author: </h4>
+                    <h4><%= author_username %></h4>
+                </section>
+
                 <section class="comment-section">
                     <h2 class="comments-title">Comments</h2>
                     <% for (let comment of final_render_response_comments) { %>
@@ -50,10 +55,6 @@
                         </div>
                     <% } %>
                 </section>
-                <footer class="author-container">
-                    <h4>Author: </h4>
-                    <h4><%= author_username %></h4>
-                </footer>
             </div> 
         </main>
 

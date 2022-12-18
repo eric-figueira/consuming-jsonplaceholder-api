@@ -127,7 +127,8 @@ exports.render_profile = ('/profile/:username', (req, res) => {
 
 exports.render_post = ('/post/:title', (req, res) => {
 
-    const title = req.params.title
+    const title = req.params.title.toLowerCase()
+
     let post_id
     
     let post_obj = {}
@@ -135,6 +136,7 @@ exports.render_post = ('/post/:title', (req, res) => {
         post_obj = {
             post_title: title,
             post_body: body
+            post_img: img
         }
     */
 
@@ -168,6 +170,8 @@ exports.render_post = ('/post/:title', (req, res) => {
                         post_obj.post_body = post["body"]
                         post_id = post["id"]
                         user_author_id = post["userId"]
+
+                        post_obj.post_body = post_obj.post_body.replace(/\n|\r/g, " "); // The body comes with \n by default from the api
                     }
                 }
 
@@ -177,6 +181,9 @@ exports.render_post = ('/post/:title', (req, res) => {
 
                 // Get the comments
                 let photos_from_post = res_photos.filter(photo => photo["albumId"] == post_id) // Getting the photos of the album from that post, rememeber: every post has an album, so basically we are getting the photos of the post
+
+                post_obj.post_img = photos_from_post[Math.floor(Math.random() * photos_from_post.length)]["url"]
+
                 for (let comment of res_comm) {
 
                     if (comment["postId"] == post_id) {
@@ -206,7 +213,7 @@ exports.render_post = ('/post/:title', (req, res) => {
                         author_username = user["username"]
                     }
                 }
-
+                
                 res.render('../src/views/post', {post_obj: post_obj, final_render_response_comments: final_render_response_comments, num_paragraphs: num_paragraphs , author_username: author_username})
             })
         )
