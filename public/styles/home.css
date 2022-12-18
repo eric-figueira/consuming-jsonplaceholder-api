@@ -1,3 +1,13 @@
+@font-face {
+    font-family: WorkSans;
+    src: url("../fonts/WorkSans-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: Ranade;
+    src: url("../fonts/Ranade-Variable.ttf");
+}
+
 * 
 {
     margin: 0;

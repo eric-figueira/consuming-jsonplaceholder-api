@@ -1,17 +1,54 @@
+@font-face {
+    font-family: WorkSans;
+    src: url("../fonts/WorkSans-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: Ranade;
+    src: url("../fonts/Ranade-Variable.ttf");
+}
+
+
+:root
+{
+    --gray-50:  #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+}
+
+
 *
 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Century Gothic;
 }
 
 img { max-width: 100%; }
 li  { list-style: none; }
 
+a 
+{
+    text-decoration: none;
+    color: currentColor;
+}
+
+
 .tab
 {
     text-indent: 8%;
+}
+
+.navbar
+{
+    background: var(--gray-50);
 }
 
 .navbar .navbar-nav
@@ -29,7 +66,7 @@ li  { list-style: none; }
 
 
 header {
-    height: 55vh;
+    height: 65vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,6 +81,7 @@ header h1
     text-transform: capitalize;
     max-width: 50%;
     text-align: center;
+    font-family: WorkSans;
 }
 
 header h3 
@@ -53,11 +91,13 @@ header h3
     text-align: center;
     font-size: 1.5rem;
     text-transform: capitalize;
+    font-family: Ranade;
 }
 
 main 
 {
     padding: 7rem 7rem 2rem 7rem;
+    background: #fff;
 }
 
 main .wrapper 
@@ -69,14 +109,16 @@ main .wrapper
 
 main .wrapper .paragraphs-container 
 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     text-align: justify;
+    font-family: Ranade;
 }
 
 main .wrapper .comment-section
 {
     position: relative;
     margin-top: 5rem;
+    font-family: WorkSans;
 }
 
 main .wrapper .comment-section .comments-title
@@ -104,6 +146,7 @@ main .wrapper .comment-section .comment
     border: 1px solid rgb(144, 144, 144);
     border-radius: 7px;
     margin-block: 30px;
+    background: var(--gray-50);
 }
 
 main .wrapper .comment-section .comment .comment-header 
@@ -135,12 +178,18 @@ main .wrapper .author-container
     gap: 1.5rem;
     font-size: 1.7rem;
     margin-top: 50px;
+    font-family: WorkSans;
+}
+
+main .wrapper .author-container a:hover
+{
+    text-decoration: underline solid #000;
 }
 
 @media (max-width: 850px)
 {
     main { padding: 2rem; }
-    header h1 { font-size: 3rem; }
+    header h1 { font-size: 2.5rem; }
     header h3 { font-size: 1rem; max-width: 450px; }
     main .wrapper .paragraphs-container { font-size: 1rem; }
     main .wrapper .author-container { font-size: 1.2rem; }
