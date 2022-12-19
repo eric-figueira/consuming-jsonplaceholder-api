@@ -8,11 +8,73 @@
     src: url("../fonts/Ranade-Variable.ttf");
 }
 
+:root
+{
+    --gray-50:  #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --black   : #000;
+    --white   : #fff;
+}
+
+.light
+{
+    --main-bg: var(--white);
+    --text: var(--black);
+    --nav-bg: var(--gray-50);
+    --comment-bg: var(--gray-50);
+    --comment-title-border: var(--gray-300);
+}
+
+.dark 
+{
+    --main-bg: var(--gray-800);
+    --text: var(--gray-300);
+    --nav-bg: var(--gray-800);
+    --comment-bg: var(--gray-700);
+    --comment-title-border: var(--gray-400);
+}
+
+.has-bg-transition
+{
+    transition: background 500ms ease-in-out;
+}
+
+.has-text-transition
+{
+    transition: color 300ms ease-in-out;
+}
+
+
 * 
 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+img { max-width: 100%; }
+li  { list-style: none; }
+
+a 
+{
+    text-decoration: none;
+    color: currentColor;
+}
+
+img { max-width: 100%; }
+li  { list-style: none; }
+
+a:hover 
+{
+    text-decoration: underline solid currentColor;
 }
 
 body
