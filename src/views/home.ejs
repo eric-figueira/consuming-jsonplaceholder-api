@@ -45,19 +45,39 @@
 
         <script>
 
-            switchTheme = () => {
+            const themeIcon = document.querySelector('#theme-icon')
+            const body = document.body
+            // Getting the theme from the local storage
+            const theme = localStorage.getItem('theme')
 
-                const body = document.body;
-                const themeIcon = document.querySelector('#theme-icon');
+            // If there is a value in the local storage, we add the class to the body
+            if (theme) {
+                body.classList.add(theme)
+                if (theme == 'light') {
+                    themeIcon.src = 'images/dark-icon.png'
+                } else if (theme == 'dark') {
+                    themeIcon.src = '/images/light-icon.png'
+                    themeIcon.style.filter = 'invert(1)'
+                }
+            }
+
+            switchTheme = () => {
 
                 if (body.classList.contains('light')) {
                     body.classList.replace('light', 'dark')
                     themeIcon.src = '/images/light-icon.png'
                     themeIcon.style.filter = 'invert(1)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'dark')
+
                 } else if (body.classList.contains('dark')) {
-                    body.classList.replace('dark', 'light');
+                    body.classList.replace('dark', 'light')
                     themeIcon.src = '/images/dark-icon.png'
                     themeIcon.style.filter = 'invert(0)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'light')
                 } 
             }
 
