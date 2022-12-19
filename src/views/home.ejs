@@ -7,17 +7,22 @@
         <title>Home Page - Posts</title>
         <link rel="stylesheet" href="/styles/home.css" type="text/css">
     </head>
-    <body>
-        <main>
-            <h1 style="font-size: 4rem; text-align: center; padding-top: 50px;">What's on Trend</h1>
+    <body class="light has-bg-transition">
+        <div class="theme-switcher-container has-bg-transition" onclick="switchTheme()">
+            <a href="javascript: void(0);" id="theme-switcher">
+                <img src="/images/dark-icon.png" alt="Theme Switcher Icon" id="theme-icon">
+            </a>
+        </div>
+        <main class="has-bg-transition">
+            <h1 class="main-title has-text-transition">What's on Trend</h1>
             <% for (let i = 0; i < final_render_response.length; i++) { %>
                 <div class="post-container">
-                    <div class="post">
+                    <div class="post has-bg-transition">
                         <div class="user-info-container">
                             <div class="user-img">
                                 <img src="<%= final_render_response[i]["profileImg"] %>" alt="Profile Image">
                             </div>
-                            <h2>
+                            <h2 class="has-text-transition">
                                 <a href="/profile/<%= final_render_response[i]["username"] %>"><%= final_render_response[i]["username"] %></a>
                             </h2>
                         </div>
@@ -26,16 +31,36 @@
                                 <img src="<%= final_render_response[i]["thumbnailUrl"] %>" alt="Album Image">
                             </div>
                             <div class="album-info-container">
-                                <h1 style="text-transform: capitalize; margin-bottom: 10px;">
+                                <h1 style="text-transform: capitalize; margin-bottom: 10px;" class="has-text-transition">
                                     <a href="/post/<%= final_render_response[i]["title"] %>"><%= final_render_response[i]["title"] %></a>
                                 </h1>
                                 <h3><%= final_render_response[i]["body"] %></h3>
-                                <p class="comments-number"><%= final_render_response[i]["numComments"] %> comentário(s)</p>
+                                <p class="comments-number has-text-transition"><%= final_render_response[i]["numComments"] %> comentário(s)</p>
                             </div>
                         </div>
                     </div>
                 </div>
             <% } %>
         </main>
+
+        <script>
+
+            switchTheme = () => {
+
+                const body = document.body;
+                const themeIcon = document.querySelector('#theme-icon');
+
+                if (body.classList.contains('light')) {
+                    body.classList.replace('light', 'dark')
+                    themeIcon.src = '/images/light-icon.png'
+                    themeIcon.style.filter = 'invert(1)'
+                } else if (body.classList.contains('dark')) {
+                    body.classList.replace('dark', 'light');
+                    themeIcon.src = '/images/dark-icon.png'
+                    themeIcon.style.filter = 'invert(0)'
+                } 
+            }
+
+        </script>
     </body>
 </html>

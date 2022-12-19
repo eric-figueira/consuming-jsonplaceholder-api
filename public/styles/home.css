@@ -8,6 +8,11 @@
     src: url("../fonts/Ranade-Variable.ttf");
 }
 
+@font-face {
+    font-family: WorkSans-Medium;
+    src: url("../fonts/WorkSans-Medium.ttf");
+}
+
 :root
 {
     --gray-50:  #f9fafb;
@@ -26,20 +31,24 @@
 
 .light
 {
+    --body-bg: var(--gray-50);
     --main-bg: var(--white);
-    --text: var(--black);
-    --nav-bg: var(--gray-50);
-    --comment-bg: var(--gray-50);
-    --comment-title-border: var(--gray-300);
+    --post-bg: var(--gray-100);
+    --text-thin: var(--gray-700);
+    --text-medium: var(--gray-800);
+    --text-bold: var(--black);
+    --theme-bg: var(--white);
 }
 
 .dark 
 {
+    --body-bg: var(--gray-900);
     --main-bg: var(--gray-800);
-    --text: var(--gray-300);
-    --nav-bg: var(--gray-800);
-    --comment-bg: var(--gray-700);
-    --comment-title-border: var(--gray-400);
+    --post-bg: var(--gray-700);
+    --text-thin: var(--gray-50);
+    --text-medium: var(--gray-200);
+    --text-bold: var(--gray-100);
+    --theme-bg: var(--black);
 }
 
 .has-bg-transition
@@ -80,30 +89,63 @@ a:hover
 body
 {
     min-height: 100vh;
-    background: rgb(216, 220, 255);
+    background: var(--body-bg);
     display: flex;
     justify-content: center;
     font-family: Century Gothic;
+}
+
+.theme-switcher-container
+{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--theme-bg);
+    padding: 20px;
+    position: fixed;
+    top: 3%;
+    left: 2%;
+    cursor: pointer;
+    z-index: 2;
 }
 
 main 
 {
     position: relative;
     min-height: 100vh;
-    width: 65vw;
-    background: rgb(228, 230, 255);
+    background: var(--main-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main h1 { color: var(--text-bold); }
+main h2, h3 { color: var(--text-medium); }
+
+main .main-title
+{
+    font-size: 4rem;
+    text-align: center;
+    padding-top: 50px;
+    color: var(--text-bold);
 }
 
 main .post-container {
     position: relative;
     padding: 3rem;
+    max-width: fit-content;
+    display: inline-block;
 }
 
 main .post-container .post {
     position: relative;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.67);
+    background: var(--post-bg);
     border-radius: 0.75rem;
+    max-width: fit-content;
+    margin: auto;
+    display: inline-block;
 }
 
 main .post-container .post .user-info-container {
@@ -129,8 +171,8 @@ main .post-container .post .album-container {
 
 main .post-container .post .album-container .album-image-container {
     position: relative;
-    height: 550px;
-    width: 100%;
+    max-height: 600px;
+    max-width: 600px;
 }
 
 main .post-container .post .album-container .album-image-container img{
@@ -139,16 +181,35 @@ main .post-container .post .album-container .album-image-container img{
     height: 100%;
 }
 
-main .post-container .post .album-container .album-info-container { margin-top: 20px; }
-main .post-container .post .album-container .album-info-container .comments-number { margin-top: 25px; }
+main .post-container .post .album-container .album-info-container 
+{ 
+    margin-top: 20px; 
+    max-width: 600px;
+}
+
+main .post-container .post .album-container .album-info-container .comments-number 
+{ 
+    margin-top: 25px; 
+    color: var(--text-thin);
+}
 
 @media (max-width: 730px) 
 {
     main { width: 95vw; }
+    main .main-title { font-size: 3rem; }
+
+    .theme-switcher-container {
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+        top: 2%;
+        left: 2%;
+    }
 }
 
 @media (max-width: 500px) 
 {
+    main .main-title { font-size: 2.5rem; }
     main .post-container { padding: 1.5rem; }
     main .post-container .post .user-info-container 
     {
