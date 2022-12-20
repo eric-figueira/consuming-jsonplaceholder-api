@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile - <%= final_render_response_user_info[0]["username"] %></title>
         <link rel="stylesheet" href="/styles/profile.css">
+        <link rel="shortcut icon" href="/images/user-logo-icon.png" type="image/x-icon">
     </head>
     <body class="light has-bg-transition">
         <nav class="navbar has-bg-transition">
@@ -85,5 +86,53 @@
                 </div>
             </div>
         </main>
+
+        <script>
+
+            const themeIcon = document.querySelector('#theme-icon');
+            const list_info_icon = document.querySelectorAll(".icon-wrapper");
+            const body = document.body
+            // Getting the theme from the local storage
+            const theme = localStorage.getItem('theme')
+
+            // If there is a value in the local storage, we add the class to the body
+            if (theme) {
+                body.classList.add(theme)
+                if (theme == 'light') {
+                    themeIcon.src = '/images/dark-icon.png'
+                } else if (theme == 'dark') {
+                    themeIcon.src = '/images/light-icon.png'
+
+                    for (let i of list_info_icon)
+                        i.style.filter = 'invert(1)'
+                }
+            }
+
+            switchTheme = () => {
+            
+                if (body.classList.contains('light')) {
+                    body.classList.replace('light', 'dark')
+                    themeIcon.src = '/images/light-icon.png'
+
+                    for (let i of list_info_icon)
+                        i.style.filter = 'invert(1)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'dark')
+
+                } else if (body.classList.contains('dark')) {
+                    body.classList.replace('dark', 'light');
+                    themeIcon.src = '/images/dark-icon.png'
+
+                    for (let i of list_info_icon)
+                        i.style.filter = 'invert(0)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'light')
+
+                } 
+            }
+
+        </script>
     </body>
 </html>

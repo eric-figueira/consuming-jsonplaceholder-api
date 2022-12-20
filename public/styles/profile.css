@@ -8,6 +8,11 @@
     src: url("../fonts/Ranade-Variable.ttf");
 }
 
+@font-face {
+    font-family: Ranade-Medium;
+    src: url("../fonts/Ranade-Medium.otf");
+}
+
 :root
 {
     --gray-50:  #f9fafb;
@@ -26,20 +31,18 @@
 
 .light
 {
-    --main-bg: var(--white);
+    --body-bg: var(--gray-200);
+    --main-bg: var(--gray-100);
     --text: var(--black);
     --nav-bg: var(--gray-50);
-    --comment-bg: var(--gray-50);
-    --comment-title-border: var(--gray-300);
 }
 
 .dark 
 {
-    --main-bg: var(--gray-800);
+    --body-bg: var(--gray-800);
+    --main-bg: var(--gray-700);
     --text: var(--gray-300);
-    --nav-bg: var(--gray-800);
-    --comment-bg: var(--gray-700);
-    --comment-title-border: var(--gray-400);
+    --nav-bg: var(--gray-900);
 }
 
 .has-bg-transition
@@ -76,16 +79,15 @@ a:hover
 body
 {
     min-height: 100vh;
-    background: rgb(216, 220, 255);
+    background: var(--body-bg);
     display: flex;
     align-items: center;
-    font-family: Century Gothic;
     flex-direction: column;
 }
 
 .navbar
 {
-    background: #fff;
+    background: var(--nav-bg);
     width: 100%;
 }
 
@@ -108,7 +110,7 @@ main
     position: relative;
     min-height: 100vh;
     width: 65vw;
-    background: rgb(228, 230, 255);
+    background: var(--main-bg);
 }
 
 main .profile-container 
@@ -126,6 +128,7 @@ main .profile-container .profile-info-posts-container .profile-info-container-gr
     grid-template-columns: 150px auto;
     grid-template-rows: 150px auto;
     grid-column-gap: 50px;
+    color: var(--text);
 } 
 
 
@@ -149,6 +152,9 @@ main .profile-container .profile-info-posts-container .profile-info-container-gr
     flex-direction: column;
 }
 
+main .profile-container .profile-info-posts-container .profile-info-container-grid .username-name h1 { font-family: Ranade-Medium; font-size: 2rem;}
+main .profile-container .profile-info-posts-container .profile-info-container-grid .username-name h3 { font-family: WorkSans; }
+
 main .profile-container .profile-info-posts-container .profile-info-container-grid .blank
 {
     grid-area: blank;
@@ -162,6 +168,7 @@ main .profile-container .profile-info-posts-container .profile-info-container-gr
 main .profile-container .profile-info-posts-container .profile-info-container-grid .list-info ul li 
 {
     list-style: none;
+    font-family: WorkSans;
 }
 
 main .profile-container .profile-info-posts-container .profile-info-container-grid .list-info ul li .info-wrapper 
@@ -172,9 +179,16 @@ main .profile-container .profile-info-posts-container .profile-info-container-gr
     margin-block: 10px;
 }
 
+main .profile-container .profile-info-posts-container .profile-info-container-grid .list-info ul li .info-wrapper h2 
+{
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+
 main .profile-container .profile-info-posts-container .profile-info-container-grid .list-info ul li .info-wrapper .icon-wrapper 
 {
-    width: 40px;
+    max-width: 40px;
+    min-width: 40px;
     height: 40px;
 }
 
@@ -195,13 +209,19 @@ main .profile-container .profile-info-posts-container .profile-buttons-wrapper .
 {
     outline: none;
     cursor: pointer;
-    border: 1px solid #000;
     padding-inline: calc(100%/12);
     padding-block: 10px;
     font-size: 1.15rem;
-    border-radius: 35px;
+    border-radius: 7px;
     font-weight: 700;
     border: none;
+    font-family: WorkSans;
+    transition: 100ms ease-in-out;
+}
+
+main .profile-container .profile-info-posts-container .profile-buttons-wrapper .button:hover
+{
+    transform: scale(1.15);
 }
 
 main .profile-container .profile-info-posts-container .profile-buttons-wrapper .button.follow 
@@ -222,10 +242,28 @@ main .profile-container .profile-info-posts-container .profile-buttons-wrapper .
     color: #fff;
 }
 
+main .profile-container .profile-posts-container
+{
+    color: var(--text);
+}
+
+main .profile-container .profile-posts-container h1 { font-family: Ranade-Medium; font-size: 2rem;}
+main .profile-container .profile-posts-container h1::after
+{
+    content: '';
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background: var(--text);
+    display: block;
+    margin-top: 0.60rem;
+}
+
 main .profile-container .profile-posts-container ul li
 {
     list-style: none;
     padding-block: 15px;
+    font-family: WorkSans;
 }
 
 @media (max-width: 1090px) {
