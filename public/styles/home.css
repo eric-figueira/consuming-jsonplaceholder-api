@@ -1,3 +1,73 @@
+@font-face {
+    font-family: WorkSans;
+    src: url("../fonts/WorkSans-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: Ranade;
+    src: url("../fonts/Ranade-Variable.ttf");
+}
+
+@font-face {
+    font-family: Ranade-Medium;
+    src: url("../fonts/Ranade-Medium.otf");
+}
+
+
+@font-face {
+    font-family: WorkSans-Medium;
+    src: url("../fonts/WorkSans-Medium.ttf");
+}
+
+:root
+{
+    --gray-50:  #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --black   : #000;
+    --white   : #fff;
+}
+
+.light
+{
+    --body-bg: var(--gray-50);
+    --main-bg: var(--white);
+    --post-bg: var(--gray-100);
+    --text-thin: var(--gray-700);
+    --text-medium: var(--gray-800);
+    --text-bold: var(--black);
+    --theme-bg: var(--white);
+}
+
+.dark 
+{
+    --body-bg: var(--gray-900);
+    --main-bg: var(--gray-800);
+    --post-bg: var(--gray-700);
+    --text-thin: var(--gray-50);
+    --text-medium: var(--gray-200);
+    --text-bold: var(--gray-100);
+    --theme-bg: var(--black);
+}
+
+.has-bg-transition
+{
+    transition: background 500ms ease-in-out;
+}
+
+.has-text-transition
+{
+    transition: color 300ms ease-in-out;
+}
+
+
 * 
 {
     margin: 0;
@@ -5,39 +75,91 @@
     box-sizing: border-box;
 }
 
+img { max-width: 100%; }
+li  { list-style: none; }
+
+a 
+{
+    text-decoration: none;
+    color: currentColor;
+}
+
+img { max-width: 100%; }
+li  { list-style: none; }
+
+a:hover 
+{
+    text-decoration: underline solid currentColor;
+}
+
 body
 {
     min-height: 100vh;
-    background: rgb(216, 220, 255);
+    background: var(--body-bg);
     display: flex;
     justify-content: center;
-    font-family: Century Gothic;
+}
+
+.theme-switcher-container
+{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--theme-bg);
+    padding: 20px;
+    position: fixed;
+    top: 3%;
+    left: 2%;
+    cursor: pointer;
+    z-index: 2;
 }
 
 main 
 {
     position: relative;
     min-height: 100vh;
-    width: 65vw;
-    background: rgb(228, 230, 255);
+    background: var(--main-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main h1 { color: var(--text-bold); }
+main h2, h3 { color: var(--text-medium); }
+
+main .main-title
+{
+    font-size: 4rem;
+    text-align: center;
+    padding-top: 50px;
+    color: var(--text-bold);
+    font-family: Ranade;
 }
 
 main .post-container {
     position: relative;
     padding: 3rem;
+    max-width: fit-content;
+    display: inline-block;
 }
 
 main .post-container .post {
     position: relative;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.67);
-    border-radius: 0.75rem;
+    background: var(--post-bg);
+    border-radius: 7px;
+    max-width: fit-content;
+    margin: auto;
+    display: inline-block;
+    
 }
 
 main .post-container .post .user-info-container {
     display: flex;
     align-items: center;
     gap: 30px;
+    font-family: Ranade-Medium;
 }
 
 main .post-container .post .user-info-container .user-img {
@@ -53,30 +175,64 @@ main .post-container .post .user-info-container .user-img img {
 main .post-container .post .album-container {
     position: relative;
     margin-top: 20px;
+    font-family: WorkSans;
 }
 
 main .post-container .post .album-container .album-image-container {
     position: relative;
-    height: 550px;
-    width: 100%;
+    max-height: 600px;
+    max-width: 600px;
 }
 
 main .post-container .post .album-container .album-image-container img{
     display: block;
     width: 100%;
     height: 100%;
+    border-radius: 7px;
 }
 
-main .post-container .post .album-container .album-info-container { margin-top: 20px; }
-main .post-container .post .album-container .album-info-container .comments-number { margin-top: 25px; }
+main .post-container .post .album-container .album-info-container 
+{ 
+    margin-top: 20px; 
+    max-width: 600px;
+}
+
+main .post-container .post .album-container .album-info-container .comments
+{
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+main .post-container .post .album-container .album-info-container .comments .comment-icon-container
+{
+    width: 30px;
+    height: 30px;
+}
+
+main .post-container .post .album-container .album-info-container .comments .comments-number 
+{ 
+    color: var(--text-thin);
+}
 
 @media (max-width: 730px) 
 {
     main { width: 95vw; }
+    main .main-title { font-size: 3rem; }
+
+    .theme-switcher-container {
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+        top: 2%;
+        left: 2%;
+    }
 }
 
 @media (max-width: 500px) 
 {
+    main .main-title { font-size: 2.5rem; }
     main .post-container { padding: 1.5rem; }
     main .post-container .post .user-info-container 
     {

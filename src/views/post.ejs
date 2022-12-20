@@ -6,29 +6,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><%= post_obj["post_title"] %></title>
         <link rel="stylesheet" href="/styles/post.css">
+        <link rel="shortcut icon" href="/images/post-logo-icon.png" type="image/x-icon">
     </head>
-    <body>
-        <nav class="navbar">
+    <body class="light">
+        <nav class="navbar has-bg-transition">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <div class="icon-wrapper">
-                        <img src="/images/home-icon.png" alt="Home Icon">
+                        <a href="/home">
+                            <img src="/images/home-icon.png" alt="Home Icon" id="home-icon">
+                        </a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <div class="icon-wrapper">
-                        <img src="/images/dark-icon.png" alt="Light-Dark Icon">
+                        <a href="javascript: void(0);" id="theme-switcher" onclick="switchTheme()">
+                            <img src="/images/dark-icon.png" alt="Light-Dark Icon" id="theme-icon">
+                        </a>
                     </div>
                 </li>
             </ul>
         </nav>
-        <header style="background: url('<%= post_obj["post_img"] %>');">
+        <header style="background: url('<%= post_obj["post_img"] %>');" class="has-text-transition">
             <h1><%= post_obj["post_title"] %></h1>
-            <h3><%= post_obj["post_title"] %></h3>
+            <h3><%= post_obj["post_body"] %></h3>
         </header>
-        <main>  
+        <main class="has-bg-transition">  
             <div class="wrapper">
-                <div class="paragraphs-container">
+                <div class="paragraphs-container has-text-transition">
                     <% for (let i = 0; i < num_paragraphs; i++) { %>
                         <p class="tab">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia rerum, facere doloremque veritatis id ullam maiores, ipsum ex quod praesentium aspernatur sint adipisci incidunt. Sit eius eum quod rerum quibusdam in fugit dolor inventore quos esse mollitia quis eaque illum adipisci voluptatum beatae iure accusantium eligendi, libero voluptatem blanditiis odio aliquam placeat. Atque omnis dicta, provident nemo tenetur commodi quos voluptas. Quia commodi saepe non totam tenetur maiores possimus doloribus animi laboriosam obcaecati a maxime nesciunt optio, odit at iure id eaque voluptas soluta repellendus hic minus accusamus expedita.</p>
                     <% } %>
@@ -36,13 +41,13 @@
                 
                 <section class="author-container">
                     <h4>Author: </h4>
-                    <h4><%= author_username %></h4>
+                    <h4><a href="/profile/<%= author_username %>"><%= author_username %></a></h4>
                 </section>
 
-                <section class="comment-section">
+                <section class="comment-section has-text-transition">
                     <h2 class="comments-title">Comments</h2>
                     <% for (let comment of final_render_response_comments) { %>
-                        <div class="comment">
+                        <div class="comment has-bg-transition">
                             <div class="comment-header">
                                 <div class="user-img-container">
                                     <img src="<%= comment["comm_user_img"] %>" alt="User Profile Image">
@@ -57,6 +62,49 @@
                 </section>
             </div> 
         </main>
+        <script>
 
+            const themeIcon = document.querySelector('#theme-icon');
+            const homeIcon = document.querySelector('#home-icon');
+            const body = document.body
+            // Getting the theme from the local storage
+            const theme = localStorage.getItem('theme')
+
+            // If there is a value in the local storage, we add the class to the body
+            if (theme) {
+                body.classList.add(theme)
+                if (theme == 'light') {
+                    themeIcon.src = '/images/dark-icon.png'
+                } else if (theme == 'dark') {
+                    themeIcon.src = '/images/light-icon.png'
+                    themeIcon.style.filter = 'invert(1)'
+                    homeIcon.style.filter = 'invert(1)'
+                }
+            }
+
+            switchTheme = () => {
+            
+                if (body.classList.contains('light')) {
+                    body.classList.replace('light', 'dark')
+                    themeIcon.src = '/images/light-icon.png'
+                    themeIcon.style.filter = 'invert(1)'
+                    homeIcon.style.filter = 'invert(1)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'dark')
+
+                } else if (body.classList.contains('dark')) {
+                    body.classList.replace('dark', 'light');
+                    themeIcon.src = '/images/dark-icon.png'
+                    themeIcon.style.filter = 'invert(0)'
+                    homeIcon.style.filter = 'invert(0)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'light')
+
+                } 
+            }
+
+        </script>
     </body>
 </html>

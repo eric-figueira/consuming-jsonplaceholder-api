@@ -82,15 +82,17 @@ exports.render_profile = ('/profile/:username', (req, res) => {
     {
         const request_users = axios.get(USERS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
         const request_posts = axios.get(POSTS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
+        const request_photos = axios.get(PHOTOS_URL, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
 
         let final_render_response_user_info = []
         let final_render_response_posts = []
 
-        axios.all([request_users, request_posts]).then(
+        axios.all([request_users, request_posts, request_photos]).then(
             axios.spread((...responses) => 
             {
                 const res_users = responses[0]["data"]
                 const res_posts = responses[1]["data"]
+                const res_photos = responses[2]["data"]
 
                 for (let user of res_users){
 
@@ -117,7 +119,11 @@ exports.render_profile = ('/profile/:username', (req, res) => {
                         }
                     }
                 }
-                res.render('../src/views/profile', {final_render_response_user_info: final_render_response_user_info, final_render_response_posts: final_render_response_posts})
+
+                // Get a random photo to be the profile image
+                let profile_image = res_photos[Math.floor(Math.random() * res_photos.length)]["thumbnailUrl"]
+
+                res.render('../src/views/profile', {final_render_response_user_info: final_render_response_user_info, final_render_response_posts: final_render_response_posts, profile_image: profile_image})
             })
         )
     }

@@ -6,32 +6,94 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home Page - Posts</title>
         <link rel="stylesheet" href="/styles/home.css" type="text/css">
+        <link rel="shortcut icon" href="/images/home-logo-icon.png" type="image/x-icon">
     </head>
-    <body>
-        <main>
-            <h1 style="font-size: 4rem; text-align: center; padding-top: 50px;">What's on Trend</h1>
+    <body class="light has-bg-transition">
+        <div class="theme-switcher-container has-bg-transition" onclick="switchTheme()">
+            <a href="javascript: void(0);" id="theme-switcher">
+                <img src="/images/dark-icon.png" alt="Theme Switcher Icon" id="theme-icon">
+            </a>
+        </div>
+        <main class="has-bg-transition">
+            <h1 class="main-title has-text-transition">What's on Trend</h1>
             <% for (let i = 0; i < final_render_response.length; i++) { %>
                 <div class="post-container">
-                    <div class="post">
+                    <div class="post has-bg-transition">
                         <div class="user-info-container">
                             <div class="user-img">
                                 <img src="<%= final_render_response[i]["profileImg"] %>" alt="Profile Image">
                             </div>
-                            <h2><%= final_render_response[i]["username"] %></h2>
+                            <h2 class="has-text-transition">
+                                <a href="/profile/<%= final_render_response[i]["username"] %>"><%= final_render_response[i]["username"] %></a>
+                            </h2>
                         </div>
                         <div class="album-container">
                             <div class="album-image-container">
                                 <img src="<%= final_render_response[i]["thumbnailUrl"] %>" alt="Album Image">
                             </div>
                             <div class="album-info-container">
-                                <h1 style="text-transform: capitalize; margin-bottom: 10px;"><%= final_render_response[i]["title"] %></h1>
-                                <h3><%= final_render_response[i]["body"] %></h3>
-                                <p class="comments-number"><%= final_render_response[i]["numComments"] %> comentário(s)</p>
+                                <h1 style="text-transform: capitalize; margin-bottom: 10px; font-family: Ranade-Medium;" class="has-text-transition">
+                                    <a href="/post/<%= final_render_response[i]["title"] %>"><%= final_render_response[i]["title"] %></a>
+                                </h1>
+                                <h3 class="has-text-transition"><%= final_render_response[i]["body"] %></h3>
+                                <div class="comments">
+                                    <div class="comment-icon-container">
+                                        <img src="/images/comment-icon.png" alt="Comments Icon" id="comment-icon">
+                                    </div>
+                                    <p class="comments-number has-text-transition"><%= final_render_response[i]["numComments"] %> comentário(s)</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             <% } %>
         </main>
+
+        <script>
+
+            const themeIcon = document.querySelector('#theme-icon')
+            const comment_icons = document.querySelectorAll('#comment-icon')
+            const body = document.body
+            // Getting the theme from the local storage
+            const theme = localStorage.getItem('theme')
+
+            // If there is a value in the local storage, we add the class to the body
+            if (theme) {
+                body.classList.add(theme)
+                if (theme == 'light') {
+                    themeIcon.src = 'images/dark-icon.png'
+                } else if (theme == 'dark') {
+                    themeIcon.src = '/images/light-icon.png'
+                    themeIcon.style.filter = 'invert(1)'
+                    for (let i of comment_icons)
+                        i.style.filter = 'invert(1)'
+                }
+            }
+
+            switchTheme = () => {
+
+                if (body.classList.contains('light')) {
+                    body.classList.replace('light', 'dark')
+                    themeIcon.src = '/images/light-icon.png'
+                    themeIcon.style.filter = 'invert(1)'
+                    for (let i of comment_icons)
+                        i.style.filter = 'invert(1)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'dark')
+
+                } else if (body.classList.contains('dark')) {
+                    body.classList.replace('dark', 'light')
+                    themeIcon.src = '/images/dark-icon.png'
+                    themeIcon.style.filter = 'invert(0)'
+                    for (let i of comment_icons)
+                        i.style.filter = 'invert(0)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'light')
+                } 
+            }
+
+        </script>
     </body>
 </html>

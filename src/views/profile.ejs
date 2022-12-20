@@ -6,13 +6,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile - <%= final_render_response_user_info[0]["username"] %></title>
         <link rel="stylesheet" href="/styles/profile.css">
+        <link rel="shortcut icon" href="/images/user-logo-icon.png" type="image/x-icon">
     </head>
-    <body>
-        <main>
+    <body class="light has-bg-transition">
+        <nav class="navbar has-bg-transition">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div class="icon-wrapper">
+                        <a href="/home">
+                            <img src="/images/home-icon.png" alt="Home Icon" id="home-icon">
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="icon-wrapper">
+                        <a href="javascript: void(0);" id="theme-switcher" onclick="switchTheme()">
+                            <img src="/images/dark-icon.png" alt="Light-Dark Icon" id="theme-icon">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <main class="has-bg-transition">
             <div class="profile-container">
                 <div class="profile-info-posts-container">
-                    <div class="profile-info-container-grid">
-                        <div class="profile-img"> </div>
+                    <div class="profile-info-container-grid has-text-transition">
+                        <div class="profile-img">
+                            <img src="<%= profile_image %>" alt="Profile Image">
+                        </div>
                         <div class="username-name">
                             <h1 style="margin-bottom: 10px;"><%= final_render_response_user_info[0]["username"] %></h1>
                             <h3><%= final_render_response_user_info[0]["name"] %></h3>
@@ -47,21 +68,71 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="profile-buttons-wrapper">
+                    <div class="profile-buttons-wrapper has-text-transition has-bg-transition">
                         <button class="button follow">Follow</button>
                         <button class="button contact">Contact</button>
                         <button class="button friend">Add Friend</button>
                     </div>
-                    <div class="profile-posts-container">
+                    <div class="profile-posts-container has-text-transition">
                         <h1>Latest Posts</h1>
                         <ul>
                             <% for (let post of final_render_response_posts) { %>
-                                <li><h2 style="text-transform: capitalize;"><%= post["post_title"] %></h2></li>
+                                <li><h2 style="text-transform: capitalize;">
+                                    <a href="/post/<%= post["post_title"] %>"><%= post["post_title"] %></a>
+                                </h2></li>
                             <% } %>
                         </ul>
                     </div>
                 </div>
             </div>
         </main>
+
+        <script>
+
+            const themeIcon = document.querySelector('#theme-icon');
+            const list_info_icon = document.querySelectorAll(".icon-wrapper");
+            const body = document.body
+            // Getting the theme from the local storage
+            const theme = localStorage.getItem('theme')
+
+            // If there is a value in the local storage, we add the class to the body
+            if (theme) {
+                body.classList.add(theme)
+                if (theme == 'light') {
+                    themeIcon.src = '/images/dark-icon.png'
+                } else if (theme == 'dark') {
+                    themeIcon.src = '/images/light-icon.png'
+
+                    for (let i of list_info_icon)
+                        i.style.filter = 'invert(1)'
+                }
+            }
+
+            switchTheme = () => {
+            
+                if (body.classList.contains('light')) {
+                    body.classList.replace('light', 'dark')
+                    themeIcon.src = '/images/light-icon.png'
+
+                    for (let i of list_info_icon)
+                        i.style.filter = 'invert(1)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'dark')
+
+                } else if (body.classList.contains('dark')) {
+                    body.classList.replace('dark', 'light');
+                    themeIcon.src = '/images/dark-icon.png'
+
+                    for (let i of list_info_icon)
+                        i.style.filter = 'invert(0)'
+
+                    // Saving to local storage
+                    localStorage.setItem('theme', 'light')
+
+                } 
+            }
+
+        </script>
     </body>
 </html>
