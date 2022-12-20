@@ -31,11 +31,16 @@
                                 <img src="<%= final_render_response[i]["thumbnailUrl"] %>" alt="Album Image">
                             </div>
                             <div class="album-info-container">
-                                <h1 style="text-transform: capitalize; margin-bottom: 10px;" class="has-text-transition">
+                                <h1 style="text-transform: capitalize; margin-bottom: 10px; font-family: Ranade-Medium;" class="has-text-transition">
                                     <a href="/post/<%= final_render_response[i]["title"] %>"><%= final_render_response[i]["title"] %></a>
                                 </h1>
-                                <h3><%= final_render_response[i]["body"] %></h3>
-                                <p class="comments-number has-text-transition"><%= final_render_response[i]["numComments"] %> comentário(s)</p>
+                                <h3 class="has-text-transition"><%= final_render_response[i]["body"] %></h3>
+                                <div class="comments">
+                                    <div class="comment-icon-container">
+                                        <img src="/images/comment-icon.png" alt="Comments Icon" id="comment-icon">
+                                    </div>
+                                    <p class="comments-number has-text-transition"><%= final_render_response[i]["numComments"] %> comentário(s)</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -46,6 +51,7 @@
         <script>
 
             const themeIcon = document.querySelector('#theme-icon')
+            const comment_icons = document.querySelectorAll('#comment-icon')
             const body = document.body
             // Getting the theme from the local storage
             const theme = localStorage.getItem('theme')
@@ -58,6 +64,8 @@
                 } else if (theme == 'dark') {
                     themeIcon.src = '/images/light-icon.png'
                     themeIcon.style.filter = 'invert(1)'
+                    for (let i of comment_icons)
+                        i.style.filter = 'invert(1)'
                 }
             }
 
@@ -67,6 +75,8 @@
                     body.classList.replace('light', 'dark')
                     themeIcon.src = '/images/light-icon.png'
                     themeIcon.style.filter = 'invert(1)'
+                    for (let i of comment_icons)
+                        i.style.filter = 'invert(1)'
 
                     // Saving to local storage
                     localStorage.setItem('theme', 'dark')
@@ -75,6 +85,8 @@
                     body.classList.replace('dark', 'light')
                     themeIcon.src = '/images/dark-icon.png'
                     themeIcon.style.filter = 'invert(0)'
+                    for (let i of comment_icons)
+                        i.style.filter = 'invert(0)'
 
                     // Saving to local storage
                     localStorage.setItem('theme', 'light')

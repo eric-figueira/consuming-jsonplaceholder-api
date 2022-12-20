@@ -9,6 +9,12 @@
 }
 
 @font-face {
+    font-family: Ranade-Medium;
+    src: url("../fonts/Ranade-Medium.otf");
+}
+
+
+@font-face {
     font-family: WorkSans-Medium;
     src: url("../fonts/WorkSans-Medium.ttf");
 }
@@ -129,6 +135,7 @@ main .main-title
     text-align: center;
     padding-top: 50px;
     color: var(--text-bold);
+    font-family: Ranade;
 }
 
 main .post-container {
@@ -142,16 +149,18 @@ main .post-container .post {
     position: relative;
     padding: 2rem;
     background: var(--post-bg);
-    border-radius: 0.75rem;
+    border-radius: 7px;
     max-width: fit-content;
     margin: auto;
     display: inline-block;
+    
 }
 
 main .post-container .post .user-info-container {
     display: flex;
     align-items: center;
     gap: 30px;
+    font-family: Ranade-Medium;
 }
 
 main .post-container .post .user-info-container .user-img {
@@ -167,6 +176,7 @@ main .post-container .post .user-info-container .user-img img {
 main .post-container .post .album-container {
     position: relative;
     margin-top: 20px;
+    font-family: WorkSans;
 }
 
 main .post-container .post .album-container .album-image-container {
@@ -179,6 +189,7 @@ main .post-container .post .album-container .album-image-container img{
     display: block;
     width: 100%;
     height: 100%;
+    border-radius: 7px;
 }
 
 main .post-container .post .album-container .album-info-container 
@@ -187,9 +198,22 @@ main .post-container .post .album-container .album-info-container
     max-width: 600px;
 }
 
-main .post-container .post .album-container .album-info-container .comments-number 
+main .post-container .post .album-container .album-info-container .comments
+{
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+main .post-container .post .album-container .album-info-container .comments .comment-icon-container
+{
+    width: 30px;
+    height: 30px;
+}
+
+main .post-container .post .album-container .album-info-container .comments .comments-number 
 { 
-    margin-top: 25px; 
     color: var(--text-thin);
 }
 
