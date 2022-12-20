@@ -8,6 +8,50 @@
     src: url("../fonts/Ranade-Variable.ttf");
 }
 
+:root
+{
+    --gray-50:  #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --black   : #000;
+    --white   : #fff;
+}
+
+.light
+{
+    --main-bg: var(--white);
+    --text: var(--black);
+    --nav-bg: var(--gray-50);
+    --comment-bg: var(--gray-50);
+    --comment-title-border: var(--gray-300);
+}
+
+.dark 
+{
+    --main-bg: var(--gray-800);
+    --text: var(--gray-300);
+    --nav-bg: var(--gray-800);
+    --comment-bg: var(--gray-700);
+    --comment-title-border: var(--gray-400);
+}
+
+.has-bg-transition
+{
+    transition: background 500ms ease-in-out;
+}
+
+.has-text-transition
+{
+    transition: color 300ms ease-in-out;
+}
+
 * 
 {
     margin: 0;
@@ -15,10 +59,18 @@
     box-sizing: border-box;
 }
 
+img { max-width: 100%; }
+li  { list-style: none; }
+
 a 
 {
     text-decoration: none;
     color: currentColor;
+}
+
+a:hover 
+{
+    text-decoration: underline solid currentColor;
 }
 
 body
@@ -26,9 +78,30 @@ body
     min-height: 100vh;
     background: rgb(216, 220, 255);
     display: flex;
-    justify-content: center;
+    align-items: center;
     font-family: Century Gothic;
+    flex-direction: column;
 }
+
+.navbar
+{
+    background: #fff;
+    width: 100%;
+}
+
+.navbar .navbar-nav
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+}
+
+.navbar .navbar-nav .nav-item .icon-wrapper
+{
+    width: 40px;
+    height: 40px;
+}
+
 
 main 
 {
@@ -43,20 +116,6 @@ main .profile-container
     padding: 5rem 8rem;
 }
 
-main .profile-container .profile-info-posts-container .profile-info-container .profile-image-username-wrapper 
-{
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-
-main .profile-container .profile-info-posts-container .profile-info-container .profile-image-username-wrapper .profile-img 
-{
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: #000;
-}
 
 main .profile-container .profile-info-posts-container .profile-info-container-grid 
 {
@@ -75,8 +134,11 @@ main .profile-container .profile-info-posts-container .profile-info-container-gr
     grid-area: profile-img;
     width: 100%;
     height: 100%;
+}
+
+main .profile-container .profile-info-posts-container .profile-info-container-grid .profile-img img 
+{
     border-radius: 50%;
-    background: #000;
 }
 
 main .profile-container .profile-info-posts-container .profile-info-container-grid .username-name
@@ -175,6 +237,18 @@ main .profile-container .profile-posts-container ul li
     main .profile-container { padding: 3rem 3rem; }
     main .profile-container .profile-info-posts-container .profile-buttons-wrapper .button { padding-inline: calc(100%/18); }
     main .profile-container .profile-info-posts-container .profile-info-container-grid {
-        grid-column-gap: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    main .profile-container .profile-info-posts-container .profile-info-container-grid .profile-img { width: 100px; height: 100px;}
+}
+
+@media (max-width: 480px) {
+    main .profile-container { padding: 1.5rem; }
+    main .profile-container .profile-info-posts-container .profile-buttons-wrapper { flex-direction: column; gap: 15px; }
+    main .profile-container .profile-info-posts-container .profile-info-container-grid .list-info ul li .info-wrapper .icon-wrapper {
+        min-width: 40px;
+        max-width: 40px;
     }
 }

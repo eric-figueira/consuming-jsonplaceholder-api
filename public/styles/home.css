@@ -98,7 +98,6 @@ body
     background: var(--body-bg);
     display: flex;
     justify-content: center;
-    font-family: Century Gothic;
 }
 
 .theme-switcher-container
